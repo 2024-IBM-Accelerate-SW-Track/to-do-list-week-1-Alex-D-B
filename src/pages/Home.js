@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AddTodo from '../component/AddTodo.js';
+import UpdateTodo from '../component/UpdateTodo.js';
 import Todos from '../component/todos.js';
 import './Home.css';
 
@@ -27,11 +28,26 @@ class Home extends Component {
       todos: new_list,
     });
   };
+
+  removeTodo = (todo) => {
+    this.setState({
+      todos: this.state.todos.filter((existingTodo) => {
+        return todo !== todo;
+      }, this.state.todos)
+    })
+  }
+  removeAll = () => {
+    this.setState({todos: []});
+  }
   render() {
     return (
       <div className="Home">
         <Todos todos={this.state.todos} />
         <AddTodo addTodo={this.addTodo} />
+        <UpdateTodo
+          removeTodoFunc={this.removeTodo}
+          removeAllFunc={this.removeAll}
+        />
       </div>
     );
   }
